@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="His_ReportService">
+		
+	
+
+	<sql id="tableName">
+		conf_param_type_tab_name
+	</sql>
+	
+	
+	<sql id="Field">
+			 id,
+			param_type,
+			tab_name,
+			tab_name_cn
+	</sql>
+	<sql id="Field2">
+	id,
+	r_id,
+	str_time,
+	sy_time,
+	cyc,
+	flow_total,
+	flow_current_speed,
+	flow_rate,
+	flow_water_level
+	
+
+	</sql>
+	<!--<sql id="Field3">
+	id,
+	r_id,
+	str_time,
+	sy_time,
+	cyc,
+	q_PH,
+	q_temp,
+	q_turbidity,
+	q_conductivity,
+	q_DO,
+	q_COD,
+	q_COD_Mn,
+	q_NH4,
+	q_TOC,
+	q_TP,
+	q_TN,
+	q_NO3,
+	q_Phe,
+	q_CN,
+	q_chlorophyll,
+	q_b_g_algae,
+	q_FDOM,
+	q_VOCs,
+	q_nitrite,
+	q_CrCl3_6H2O,
+	q_Pb,
+	q_Cd,
+	q_Cu,
+	q_Hg,
+	q_As,
+	q_Fe,
+	q_Cr6,
+	q_Mn,
+	q_Ni,
+	q_Zn,
+	q_tss,
+	q_MnO4,
+	q_Salinity,
+	q_Phosphate,
+	q_Sulfate,
+	q_NH42
+
+	 
+
+
+	</sql>
+	<sql id="Field4">
+	id,
+	r_id,
+	str_time,
+	sy_time,
+	cyc,
+	q_An,
+	q_F,
+	q_S,
+	q_Poison,
+	q_tC2H2Cl2,
+	q_fC2H2Cl2,
+	q_CHCl3,
+	q_C2H2Cl2,
+	q_Benzene,
+	q_C2HCl3,
+	q_C7H8,
+	q_C2Cl4,
+	q_C6H5Cl,
+	q_C6H5C2H5,
+	q_C8H10,
+	q_C8H8,
+	q_C6H4CH32,
+	q_C9H12,
+	q_14C6H4Cl2,
+	q_12C6H4Cl2,
+	q_C2H3Cl,
+	q_C2H4O,
+	q_C3H4O,
+	q_11C2H2Cl2,
+	q_C3H3N,
+	q_CH2CClCHCH2,
+	q_CHBr3,
+	q_C10H16,
+	q_C4Cl6,
+	q_CH2Cl2,
+	q_OC,
+	q_C6H5NO2,
+	q_C6H4N2O4,
+	q_C6H3Cl3,
+	q_C6H4Cl2
+
+	
+
+	</sql>
+	<sql id="Field5">
+	id,
+	r_id,
+	str_time,
+	sy_time,
+	cyc,
+	q_spare01,
+	q_spare02,
+	q_spare03,
+	q_spare04,
+	q_spare05,
+	q_spare06,
+	q_spare07,
+	q_spare08,
+	q_spare09,
+	q_spare10,
+	q_spare11,
+	q_spare12,
+	q_spare13,
+	q_spare14,
+	q_spare15,
+	q_spare16,
+	q_spare17,
+	q_spare18,
+	q_spare19,
+	q_spare20,
+	q_spare21,
+	q_spare22,
+	q_spare23,
+	q_spare24,
+	q_spare25
+
+	
+
+	</sql>
+	
+	
+		--><!-- 字段值 -->
+	<sql id="FieldValue">
+		    #{id},
+			#{param_type},
+			#{tab_name},
+			#{tab_name_cn}
+		  
+		
+	</sql>
+	<sql id="FieldValue2">
+	#{id},
+	#{r_id},
+	#{str_time},
+	#{sy_time},
+	#{cyc},
+	#{flow_total},
+	#{flow_current_speed},
+	#{flow_rate},
+	#{flow_water_level}
+	
+		  
+		
+	</sql>
+	
+	
+		<!-- 字段值 -->
+	
+	
+	<!--水类型  -->
+	<select id="water_type" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		
+	</select>
+	
+	
+	<!--水曲线  -->
+	<select id="line_his_water" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field2"></include>
+		from 
+		${tabName}
+		where 1=1 and 
+	r_id =#{R_ID}   
+	and sy_time&gt;=#{start_sy_time} and sy_time&lt;=#{end_sy_time} and sy_time%${time_space}=0  order by sy_time asc;
+		
+	</select>
+	<!--水曲线  -->
+	<select id="line_his_poll1" parameterType="pd" resultType="pd">
+		select
+		*
+		from 
+		${tabName}
+		where 1=1 and 
+	r_id =#{R_ID}   
+	and sy_time&gt;=#{start_sy_time} and sy_time&lt;=#{end_sy_time} and sy_time%${time_space}=0  order by sy_time asc;
+		
+	</select>
+	<select id="line_his_poll2" parameterType="pd" resultType="pd">
+		select
+		*
+		from 
+		${tabName}
+		where 1=1 and 
+	r_id =#{R_ID}   
+	and sy_time&gt;=#{start_sy_time} and sy_time&lt;=#{end_sy_time} and sy_time%${time_space}=0  order by sy_time asc;
+		
+	</select>
+	<select id="line_his_poll3" parameterType="pd" resultType="pd">
+		select
+		*
+		from 
+		${tabName}
+		where 1=1 and 
+	r_id =#{R_ID}   
+	and sy_time&gt;=#{start_sy_time} and sy_time&lt;=#{end_sy_time} and sy_time%${time_space}=0  order by sy_time asc;
+		
+	</select>
+</mapper>

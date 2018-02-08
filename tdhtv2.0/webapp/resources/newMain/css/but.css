@@ -1,0 +1,48 @@
+.tabs li a{
+	border-radius:0px;
+	color:#333333;
+	
+	border-color:#333333;
+	background-color:#fff;
+	font-size: 16px;
+	font-family: 微软雅黑;
+}
+.tabs li ul li a{
+	border-radius:0px;
+	color:#333333;
+
+	border-color:#333333;
+	background-color:#fff;
+	font-size: 16px;
+	font-family: 微软雅黑;
+	border-top: none;
+	border-bottom: none;
+}
+.tabs li a:hover{
+	color:#333333;
+	border-color:#333333;
+	border-bottom:0px;
+    background-color:#fff;
+}
+.tabs li ul li a:hover{
+	
+	border-color:#333333;
+	border-bottom:0px;
+   background-color:#fff;
+}
+.current1{
+	color:#333333;
+	border-color:#333333;
+	border-bottom:0px;
+    background-color:#fff;
+}
+.current2{
+	color:#333333;
+	border-color:#333333;
+	border-bottom:0px;
+    background-color:#fff;
+}
+.current3{
+	color:#0071bc;
+	
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ControlManager">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		src_device_online
+		
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+	src_device_online.id,
+	r_id,
+	device_id,
+	src_device_online.device_type,
+	device_state,
+	str_time,
+	sy_time
+	
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+	#{id},
+	#{r_id},
+	#{device_id},
+	#{device_type},
+	#{device_state},
+	#{str_time},
+	#{sy_time}
+	
+	</sql>
+	<!-- 通过R_ID获取数据 -->
+	<select id="select_online" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include> ,tab_name,device_name_cn  
+		from 
+		<include refid="tableName"></include> ,  conf_device_type_tab_name 
+		where 
+			R_ID=#{R_ID} and sy_time=(select MAX(sy_time) from <include refid="tableName"></include> where R_ID=#{R_ID} )and 
+			 src_device_online.device_type=conf_device_type_tab_name.device_type
+	</select>
+	
+	
+	
+</mapper>

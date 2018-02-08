@@ -1,0 +1,65 @@
+﻿
+
+.wrapper
+
+{
+
+    margin: 0 auto;
+
+    width: 500px;
+
+    margin-top: 100px;
+
+}
+
+.clear
+
+{
+
+    clear: both;
+
+}
+
+
+
+
+
+
+
+
+.panel
+
+{
+
+    width: 470px;
+
+    margin: 0 auto;
+
+    background-color: #1C1915;
+
+    padding: 15px;
+
+    color: #CCCCCC;
+
+    font: 30px Arial, Helvetica, sans-serif;
+
+    margin-top: 30px;
+
+    -webkit-border-radius: 6px;
+
+    -moz-border-radius: 6px;
+
+    border-radius: 6px;
+
+    height: 100px;
+
+}
+
+.panel.go-green
+
+{
+
+    color: #73d006;
+
+}
+

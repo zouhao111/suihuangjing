@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="NewDataManager">
+	
+
+	<sql id="tableName">
+		st_main_table_real
+	</sql>
+	
+	<sql id="Field">
+		 ID,	
+		 R_ID,
+		 R_NAME_CN,	
+		 DEVICE_ID,
+		 PARAM_ID,
+		 PARAM_NAME,
+		 PARAM_NAME_CN,
+		 PARAM_NAME_SQL,
+		 MODBUS_ADDR,
+		 DATA_TYPES,
+		 BYTE_ORDER,
+		 DECIMAL_NUMBER,
+		  LIMITH,
+		 LIMITHH,
+		 LIMITL,
+		 LIMITLL,
+		 LIMIT_ABLE,
+		 LIMIT_TYPE,
+		 PARAM_ABLE,
+		 PARAM_TYPE,
+		 STR_TIME,
+		 SY_TIME,
+		 PARAM_VALUE,
+		 POLLUTANT_TYPE
+		
+		 
+	</sql>
+	
+		<!-- 字段值 -->
+	<sql id="FieldValue">
+		 #{ID},	
+		 #{R_ID},
+		 #{R_NAME_CN},	
+		 #{DEVICE_ID},
+		 #{PARAM_ID},
+		 #{PARAM_NAME},
+		 #{PARAM_NAME_CN},
+		 #{PARAM_NAME_SQL},
+		 #{MODBUS_ADDR},
+		 #{DATA_TYPES},
+		 #{BYTE_ORDER},
+		 #{DECIMAL_NUMBER},
+		 #{LIMITH},
+		 #{LIMITHH},
+		 #{LIMITL},
+		 #{LIMITLL},
+		 #{LIMIT_ABLE},
+		 #{LIMIT_TYPE},
+		 #{PARAM_ABLE},
+		 #{PARAM_TYPE},
+		 #{STR_TIME},
+		 #{SY_TIME},
+		 #{PARAM_VALUE},
+		#{POLLUTANT_TYPE}
+	</sql>
+	
+	
+	
+	
+	
+	<!-- 列表 -->
+	<select id="listAll_pd" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>  
+		where 1=1 and 
+		R_ID =#{R_ID}  and PARAM_TYPE in (7,8,9) order by PARAM_ID 
+		
+	</select>
+	
+	<!-- 列表 -->
+	<select id="listAll_pd_water" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		where 1=1 and 
+		R_ID =#{R_ID}  and PARAM_TYPE in (1,2,3,4) order by PARAM_ID 
+		
+		
+	</select>
+	<!-- 列表 -->
+	<select id="listAll_water_state" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		where 1=1 and 
+		R_ID =#{R_ID}  and PARAM_TYPE in (5,11) order by PARAM_ID 
+		
+		
+	</select>
+	
+	<select id="listAll_control" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		where 1=1 and 
+		R_ID =#{R_ID}  and PARAM_TYPE=0 order by PARAM_ID 
+		
+		
+	</select>
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include> 
+		from 
+		<include refid="tableName"></include> 
+		where 
+			R_ID = #{R_ID} 
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="selectOne" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include> 
+		from 
+		<include refid="tableName"></include> 
+		where 
+			R_ID = #{R_ID} and PARAM_NAME_SQL=#{mySelect}
+	</select>
+	<!-- 列表(全部) -->
+	<select id="selectListByType" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include> 
+		from 
+		<include refid="tableName"></include> 
+		where 
+			R_ID = #{R_ID} and PARAM_TYPE=#{select}
+	</select>
+	
+	
+	<select id="selectAllTabName" parameterType="pd" resultType="pd">
+	SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'tdht03test' and TABLE_NAME like #{tabAllName}; 
+	
+	</select>
+	
+</mapper>

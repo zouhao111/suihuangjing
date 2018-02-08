@@ -1,0 +1,240 @@
+@charset "utf-8";
+
+ ::-ms-clear{ display: none; }
+::-ms-reveal{ display: none; }
+html,body{height:100%;}
+#body-img{
+position: absolute;
+top:0px;
+z-index: 1px;
+
+}
+body{
+	
+overflow-y:auto;
+overflow-x:hidden;
+margin: 0px;
+}
+*{
+font-family:微软雅黑;
+}
+#imgrem{
+ position: relative;
+ margin-top:13px;
+ cursor:pointer;
+ margin-left: 20px;
+}
+.checkbox{
+ width: 30px;
+ height: 30px;
+ background: url(../img/passere1.png) no-repeat;
+}
+
+#log{
+width:391px;
+height:417px;
+position:absolute;
+top:50%;
+left:50%;
+margin-top:-195px;
+margin-left:-200px;
+/*background:url(../img/log.png) no-repeat;
+z-index: 99999;*/
+}
+
+#login-btn{
+behavior: url(ie-css3.htc) ;
+border-radius: 6px;
+position: absolute;
+top:285px;
+right:25px;
+width:347px;
+height:52px;
+filter: alpha(opacity=40);  
+    background-color: rgb(0, 0, 0);  
+      
+    background-color: rgba(0, 0, 0, 0); 
+    border:1px solid #fff; 
+    cursor: pointer;
+}
+
+.input-text-wrap{
+	margin-bottom: 20px
+	}
+	
+	
+.app{
+height: 41px;
+    position: relative;
+    margin-top: 95px;
+    cursor: pointer;
+}	
+.app_img{
+ position: absolute;
+ 
+ margin-left: 20px;
+ display: none;
+}	
+#rember{
+position: absolute;
+top:216px;
+left:51px;
+font-size:14px;
+color:#fff;
+}
+#forget{
+	position: absolute;
+	top:210px;
+	right:25px ;
+	font-size:14px;
+	color:#fff
+}
+
+	
+	
+.input-text{
+	width:347px;
+   height:52px;
+    border:1px solid #fff; 
+	filter: alpha(opacity=40);  
+    background-color: rgb(0, 0, 0);  
+    background-color: rgba(0, 0, 0, 0); 
+border-radius: 6px;
+behavior: url(ie-css3.htc) ;
+	}
+.input_1{
+	float:right;
+	width:280px;
+    height:45px;
+   
+     filter: alpha(opacity=40);  
+    background-color: rgb(0, 0, 0);  
+    background-color: rgba(0, 0, 0, 0); 
+     border:0px; 
+     color:#fff;
+     font-size:18px;
+      border:none;
+    outline:medium;
+  
+     /* background:url(../img/username.png) center left no-repeat;  */
+	}
+#imgere{
+	position:absolute;
+	top:18px;
+	right:18px;
+	
+	cursor:pointer;
+	z-index: 1;
+	}
+.imgtop{
+	float: left;
+	margin-left: 24px;
+	margin-top: 13px;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader (src="../img/username.png", enabled=true, sizingMethod=scale); 
+	}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #fff;  
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #fff;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+    color: #fff;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+    color: #fff;
+}
+
+.right_top{
+text-decoration:none;
+color:#fff;
+}
+#a_top{
+	position: absolute;
+    top: 0px;
+    right: 5px;
+float:right;
+font-size:18px;
+margin-top:25px;
+margin-right:25px;
+}
+ ::-ms-clear, ::-ms-reveal{display: none;}
+ .font-img{
+   position: absolute;
+   top: 20%;
+   right: 800px ;
+   z-index: 0;
+  }
+ 
+  /*
+ 
+ @media screen and (min-width: 980px) {
+.font-img{
+   position: absolute;
+   top: 20%;
+   right: 600px ;
+   z-index: 0;
+  }
+}
+@media screen and (min-width: 1200px) {
+.font-img{
+   position: absolute;
+   top: 20%;
+   right: 800px ;
+   z-index: 0;
+  }
+}
+
+app
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+#elementss {
+	border-radius: 50%;
+	 
+	 宽度和高度需要相等 
+}
+ 动画定义 
+@keyframes spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+ 旋转，渐变色 
+#elements {
+	width: 200px;
+	height: 200px;
+
+	background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, yellow 0%, orange 100%, red 95%);
+	background-image: -webkit-radial-gradient(45px 45px, circle cover, yellow, orange);
+	background-image: radial-gradient(45px 45px 45deg, circle cover, yellow 0%, orange 100%, red 95%);
+
+	animation-name: spin; 
+	animation-duration: 3s;  3 seconds 
+	animation-iteration-count: infinite; 
+	animation-timing-function: linear;
+}
+ @-webkit-keyframes twinkling{    透明度由0到1
+
+    0%{
+       opacity:1; 透明度为0
+
+     }
+    100%{
+       opacity:0.4; 透明度为1
+    }
+
+  }
+*/

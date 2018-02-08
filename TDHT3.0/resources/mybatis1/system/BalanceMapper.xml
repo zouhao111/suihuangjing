@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BalanceManager">
+	
+
+	<sql id="tableName">
+		st_balance_calc_state
+	</sql>
+	
+	<sql id="Field">
+		 	
+		 R_ID,
+		 R_NAME_CN,	
+		 DEVICE_ID,
+		 DEVICE_TYPE,
+		 DEVICE_NAME_CN,
+		 TAB_NAME,
+		 BALANCE_CALC,
+		 R_BALANCE_PER_CALC,
+		 R_N,
+		 R_Q,
+		 R_K
+		  
+	</sql>
+	
+		<!-- 字段值 -->
+	<sql id="FieldValue">
+		
+		 #{R_ID},
+		 #{R_NAME_CN},	
+		#{DEVICE_ID},
+		 #{DEVICE_TYPE},
+		#{DEVICE_NAME_CN},
+		#{TAB_NAME},
+		#{BALANCE_CALC},
+		#{R_BALANCE_PER_CALC},
+		 #{R_N},
+		 #{R_Q},
+		 #{R_K}
+	</sql>
+	
+	<sql id="tableName2">
+		calc_flow_day_sum
+	</sql>
+	
+	<sql id="Field2">
+		 	ID,
+		 R_ID,
+		 STR_TIME,
+		 SY_TIME,
+		 CYC,
+		 I_DRAINAGE_F,
+		 I_SUPPLY_F,
+		 L_DRAINAGE_F,
+		 L_SUPPLY_F,
+		 R_SUPPLY_F
+		 
+		 
+		
+		  
+	</sql>
+	
+		<!-- 字段值 -->
+	<sql id="FieldValue2">
+		
+		 
+		 #{ID},
+		 #{R_ID},
+		 #{STR_TIME},
+		 #{SY_TIME},
+		  #{CYC},
+		 #{I_DRAINAGE_F},
+		 #{I_SUPPLY_F},
+		 #{L_DRAINAGE_F},
+		 #{L_SUPPLY_F},
+		 #{R_SUPPLY_F}
+	</sql>
+	
+	
+	
+	<!-- 列表 -->
+	<select id="list_day_follow" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field2"></include>
+		from 
+		<include refid="tableName2"></include>  
+		
+		where 1=1 and 
+		R_ID =#{R_ID} and  CYC=(select max(CYC) from calc_flow_day_sum  where R_ID =#{R_ID})
+		
+		
+	</select>
+	<!-- 列表 -->
+	<select id="list_day_follow2" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field2"></include>
+		from 
+		<include refid="tableName2"></include>  
+		
+		where 1=1 and 
+		R_ID =#{R_ID} and  sy_time&gt;=#{startTime} and sy_time&lt;=#{endTime} order by str_time asc limit #{offset} ,#{limit}
+		
+		
+	</select>
+	<!-- 列表 -->
+	<select id="list_day_follow3" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field2"></include>
+		from 
+		<include refid="tableName2"></include>  
+		
+		where 1=1 and 
+		R_ID =#{R_ID} and  sy_time&gt;=#{startTime} and sy_time&lt;=#{endTime} order by str_time asc 
+		
+		
+	</select>
+	<!-- 列表 -->
+	<select id="balance_config" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		where 1=1 and 
+		R_ID =#{R_ID}  
+		
+		
+	</select>
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include> 
+		from 
+		<include refid="tableName"></include> a
+		where 
+			R_ID = #{R_ID} 
+	</select>
+	
+	<select id="select_cyc" parameterType="pd" resultType="pd">
+	select * from conf_site_cyc where R_ID = #{R_ID} and sy_time&gt;=#{startTime} and sy_time&lt;=#{endTime}
+	
+	</select>
+	<!-- fh313596790qq(青苔) -->
+</mapper>

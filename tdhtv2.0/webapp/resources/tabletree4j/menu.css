@@ -1,0 +1,79 @@
+@CHARSET "UTF-8";
+
+/**
+ * TABLETREE4J VESION 2 CSS
+ * @author LK
+ * @email lannerk@qq.com
+ * @date 2010-5-5
+ * @version 2.0
+ */
+
+.bigtitle{
+		font-family:Arial;
+		font-weight:bold;
+		font-size:22px;
+		margin-bottom:10px;
+	}
+	.footer{
+		font-family:Arial;
+		font-weight:bold;
+		font-size:12px;
+		color:#747474;
+	}
+
+	.title{
+		padding-left:10px;
+		font-family:Arial;
+		/*font-weight:bold;*/
+		font-size:18px;
+		color:#747474;
+	}
+
+	.fromtitle{
+		background-color:#f5f5f5;
+		text-align:center;
+		font-family:Arial;
+		color:#acac59;
+		padding-top:5px;
+		padding-bottom:5px;
+	}
+
+	.fromcontent{
+		font-family:Arial;
+		padding-right:5px;
+		padding-bottom:10px;
+		padding-top:10px;
+	}
+
+	.content{
+		font-family:Arial;
+	}
+	.clickbtn{
+		cursor:pointer;
+	}
+	.headerbg{
+		background:#c2e0f4 repeat-x;
+		height:27px;
+		font-family:"Arial";
+	}
+	.headerbg td{
+		text-align:center;
+	}
+
+
+	.tabletree4j-gird td{
+	height:27px;
+	}
+
+	.arrow-tt-node-content{
+		text-align:center;
+		width:100%;
+	}
+	.circle-tt-node-content{
+		text-align:center;
+		width:100%;
+	}
+	.default-tt-node-content{
+		text-align:center;
+		width:100%;
+	}

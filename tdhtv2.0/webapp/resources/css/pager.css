@@ -1,0 +1,8 @@
+@charset "utf-8";
+#pagelist { margin:10px auto 10px auto;  height:26px; }
+/* #pagelist ul li { float:left; border:1px solid #2980b9; height:20px; line-height:20px; margin:0px 2px;} */
+#pagelist ul{margin:0 auto; text-align:center;list-style-type:none;}
+
+#pagelist ul li {  display:inline-block; height:26px;}
+/* #pagelist ul li a, .pageinfo { display:block; padding:0px 6px; background:#c2e0f4;} */
+#pagelist    .pageinfo { display:block; padding:0px 6px; background:#c2e0f4;}

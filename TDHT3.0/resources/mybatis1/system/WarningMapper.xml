@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="WarningManager">
+	
+
+	
+	
+	
+	<!-- 列表 
+	<select id="list_day_follow" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field2"></include>
+		from 
+		<include refid="tableName2"></include>  
+		
+		where 1=1 and 
+		R_ID =#{R_ID} and  CYC=(select max(CYC) from calc_flow_day_sum  where R_ID =#{R_ID})
+		
+		
+	</select>
+	-->
+	
+	
+	<select id="select_now_warning" parameterType="pd" resultType="pd">
+	select * from ${tabName} where R_ID = #{R_ID} and str_time&gt;=DATE_FORMAT(DATE_SUB(NOW(),INTERVAL 5 MINUTE),'%Y-%m-%d %H:%i')order by str_time desc limit 1 
+	</select>
+	<select id="select_now_early_warning" parameterType="pd" resultType="pd">
+	select * from ${tabName2} where R_ID = #{R_ID} and str_time&gt;=DATE_FORMAT(DATE_SUB(NOW(),INTERVAL 5 MINUTE),'%Y-%m-%d %H:%i') order by str_time desc limit 1 
+	</select>
+	
+	<select id="select_his_warning" parameterType="pd" resultType="pd">
+	select * from ${tabName} where R_ID = #{R_ID} and  sy_time&gt;=#{start_sy_time} and sy_time&lt;=#{end_sy_time} 
+       order by str_time asc ; 
+	</select>
+	<select id="select_his_early_warning" parameterType="pd" resultType="pd">
+	select * from ${tabName2} where R_ID = #{R_ID} and  sy_time&gt;=#{start_sy_time} and sy_time&lt;=#{end_sy_time} 
+	 order by str_time asc ; 
+	</select>
+	<select id="his_early_warning" parameterType="pd" resultType="pd">
+	select * from ${tabName} where R_ID = #{R_ID} and  sy_time&gt;=#{start_sy_time} and sy_time&lt;=#{end_sy_time} 
+	 order by str_time asc limit #{offset},#{limit}
+	</select>
+	<select id="his_early_warning_count" parameterType="pd" resultType="pd">
+	select count(id)count from ${tabName} where R_ID = #{R_ID} and  sy_time&gt;=#{start_sy_time} and sy_time&lt;=#{end_sy_time} 
+	 order by str_time asc
+	</select>
+</mapper>

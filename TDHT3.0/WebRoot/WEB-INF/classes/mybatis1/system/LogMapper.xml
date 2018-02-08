@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LogMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		src_device_online
+	</sql>
+	
+	
+	<!-- 查询设备日志 -->
+	<select id="listLog" parameterType="pd" resultType="pd">
+		SELECT a.id,a.r_id,a.device_id,a.device_type,a.device_state,a.str_time,a.sy_time,b.device_name_cn,c.r_name_cn
+		 from src_device_online a,conf_device_type_tab_name b,conf_site_name c 
+		  WHERE a.r_id= #{R_ID} and a.DEVICE_TYPE=b.DEVICE_TYPE and c.r_id=a.r_id 
+		  and sy_time &lt;= #{endTime} and sy_time &gt;=#{startTime} limit #{offset} ,#{limit}
+	</select>
+	
+	<!-- 查询设备日志总条数 -->
+	<select id="countLog" parameterType="pd" resultType="pd">
+		SELECT count(id)id from src_device_online 
+		 WHERE r_id= #{R_ID} and sy_time &lt;= #{endTime} and sy_time &gt;=#{startTime}
+	</select>
+	
+	<!-- 新增维护记录 -->
+	<select id="addMaintain" parameterType="pd" resultType="pd">
+	INSERT INTO src_maintenance_log (r_id, str_time, user_name, user_ip, content) 
+	VALUES (#{r_id}, #{str_time}, #{user_name}, #{user_ip}, #{content} )
+	</select>
+	
+	<!-- 查询维护记录 -->
+	<select id="findMaintain" parameterType="pd" resultType="pd">
+	SELECT log.str_time,log.user_name,log.user_ip,log.content,com.r_name_cn from src_maintenance_log log,conf_site_name com  
+	WHERE log.r_id=com.r_id and log.str_time &lt;= #{endTime} and log.str_time &gt;=#{startTime} limit #{offset} ,#{limit}
+	</select>
+	
+	<!-- 查询维护记录总条数 -->
+	<select id="countMaintain" parameterType="pd" resultType="pd">
+	SELECT count(id)id from src_maintenance_log
+	WHERE str_time &lt;= #{endTime} and str_time &gt;=#{startTime} 
+	</select>
+	
+	<!-- 查询操作日志 -->
+	<select id="findControl" parameterType="pd" resultType="pd">
+	SELECT log.str_time,log.r_id,log.user_name,log.user_ip,log.content,com.r_name_cn from src_control_log log,conf_site_name com 
+	WHERE log.r_id=com.r_id and log.str_time &lt;= #{endTime} and log.str_time &gt;=#{startTime} limit #{offset} ,#{limit}
+	</select>
+	
+	<!-- 查询操作日志总条数 -->
+	<select id="countControl" parameterType="pd" resultType="pd">
+	SELECT count(id)id from src_control_log 
+	WHERE str_time &lt;= #{endTime} and str_time &gt;=#{startTime} 
+	</select>
+	
+
+	<!-- fh313596790qq(青苔) -->
+</mapper>

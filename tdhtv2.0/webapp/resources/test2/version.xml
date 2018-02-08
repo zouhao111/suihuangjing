@@ -1,0 +1,7 @@
+<update>
+	<version>6</version>
+        <name>TDHTsystemV1.apk</name>
+	<versionname>V1.0.6 (160802)</versionname>
+        <description>更新内容:\n1.预警报警模块增加历史报警和历史预警功能。\n2.实时监测数据增加工业给水/生活给水的水位数值。\n3.修复测试1没有实时数据的问题。\n4.修复地图定位界面标题显示不完整的问题。\n5.曲线图形提示框增加横坐标文字说明。\n6.曲线图形区域缩放工具样式修改，改善拖拽不流畅问题。\n7.修复界面偶尔卡顿的问题。</description>
+	<url>http://211.154.140.180:3333/resources/app/TDHTsystemV1.apk</url>
+</update>

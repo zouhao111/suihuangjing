@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="InfoMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		st_conf_main_table
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		id,	
+		r_id,	
+		str_time,	
+		sy_time,	
+		cyc,	
+		i_drainage_f,	
+		i_supply_f,	
+		l_drainage_f,	
+		l_supply_f,	
+		r_supply_f
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{id},	
+		#{r_id},	
+		#{str_time},	
+		#{sy_time},	
+		#{cyc},	
+		#{i_drainage_f},	
+		#{i_supply_f},	
+		#{l_drainage_f},	
+		#{l_supply_f},	
+		#{r_supply_f}
+	</sql>
+	
+
+	
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="listQuality" parameterType="pd" resultType="pd">
+		select 
+		*
+		from 
+		<include refid="tableName"></include>
+		where R_ID = #{pd.R_ID} and PARAM_TYPE in (7,8,9) order by PARAM_ID 
+	</select>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="listControl" parameterType="pd" resultType="pd">
+		select 
+		*
+		from 
+		<include refid="tableName"></include>
+		where R_ID = #{pd.R_ID} and PARAM_TYPE in (0) order by PARAM_ID 
+	</select>
+	
+	
+
+	<!-- fh313596790qq(青苔) -->
+</mapper>

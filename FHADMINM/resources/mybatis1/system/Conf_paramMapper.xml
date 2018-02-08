@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Conf_paramMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		CONF_PARAM
+	</sql>
+	<sql id="tableName2">
+		conf_param_sqlname_type_limit
+	</sql>
+	<sql id="tableName3">
+		st_conf_main_table
+	</sql>
+	
+	<sql id="Field3">
+		ID,	
+		R_ID,
+		R_NAME_CN,	
+		 DEVICE_ID,
+		 DEVICE_TYPE,
+		 PARAM_ID,
+		 PARAM_TYPE,
+		 PARAM_NAME,
+		 PARAM_NAME_CN,
+		 PARAM_NAME_SQL,
+		 TEN_MULTIPLE,
+		 POLLUTANT_TYPE,
+		 TAB_NAME_CN,
+		 TAB_NAME,
+		 PARAM_NAME_NUMB,
+		 MODBUS_ADDR,
+		 DATA_TYPES,
+		 BYTE_ORDER,
+		 SCALE_FACTOR,
+		 OFFSET_VALUE,
+		 DECIMAL_NUMBER,
+		 LIMIT_TYPE,
+		 LIMITH,
+		 LIMITHH,
+		 LIMITL,
+		 LIMITLL,
+		 LIMIT_ABLE,
+		 PARAM_VALUE,
+		 STR_TIME,
+		 SY_TIME,
+		 PARAM_ABLE
+		 
+	</sql>
+	
+		<!-- 字段值 -->
+	<sql id="FieldValue3">
+		 #{ID},	
+		 #{R_ID},
+		 #{R_NAME_CN},	
+		 #{DEVICE_ID},
+		 #{DEVICE_TYPE},
+		 #{PARAM_ID},
+		 #{PARAM_TYPE},
+		 #{PARAM_NAME},
+		 #{PARAM_NAME_CN},
+		 #{PARAM_NAME_SQL},
+		 #{TEN_MULTIPLE},
+		 #{POLLUTANT_TYPE},
+		 #{TAB_NAME_CN},
+		 #{TAB_NAME},
+		 #{PARAM_NAME_NUMB},
+		 #{MODBUS_ADDR},
+		 #{DATA_TYPES},
+		 #{BYTE_ORDER},
+		 #{SCALE_FACTOR},
+		 #{OFFSET_VALUE},
+		 #{DECIMAL_NUMBER},
+		 #{LIMIT_TYPE},
+		 #{LIMITH},
+		 #{LIMITHH},
+		 #{LIMITL},
+		 #{LIMITLL},
+		 #{LIMIT_ABLE},
+		 #{PARAM_VALUE},
+		 #{STR_TIME},
+		 #{SY_TIME},
+		 #{PARAM_ABLE}
+	</sql>
+	<!-- 字段 -->
+	<sql id="Field2">
+		ID,	
+		PARAM_NAME,	
+		PARAM_NAME_CN,	
+		PARAM_NAME_SQL,	
+		PARAM_TYPE,	
+		LIMIT_TYPE,	
+		PARAM_NAME_NUMB,
+		ten_multiple,
+		pollutant_type
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue2">
+		#{ID},	
+		#{PARAM_NAME},	
+		#{PARAM_NAME_CN},	
+		#{PARAM_NAME_SQL},	
+		#{PARAM_TYPE},	
+		#{LIMIT_TYPE},	
+		#{PARAM_NAME_NUMB},
+		#{ten_multiple},
+		#{pollutant_type}
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+	   
+	    
+	    DEVICE_ID,
+	    PARAM_ID,
+		PARAM_NAME,	
+			
+		MODBUS_ADDR,	
+		DATA_TYPES,	
+		BYTE_ORDER,	
+		SCALE_FACTOR,	
+		OFFSET_VALUE,	
+		LIMITH,	
+		LIMITHH,	
+		LIMITL,	
+		LIMITLL,	
+		PARAM_VALUE,	
+		STR_TIME,	
+		SY_TIME,	
+		PARAM_ABLE,	
+		LIMIT_ABLE,	
+		DECIMAL_NUMBER
+	</sql>
+	
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+	  
+	    #{DEVICE_ID},
+	    #{PARAM_ID},
+		#{PARAM_NAME},	
+		
+		#{MODBUS_ADDR},	
+		#{DATA_TYPES},	
+		#{BYTE_ORDER},	
+		#{SCALE_FACTOR},	
+		#{OFFSET_VALUE},	
+		#{LIMITH},	
+		#{LIMITHH},	
+		#{LIMITL},	
+		#{LIMITLL},	
+		#{PARAM_VALUE},	
+		#{STR_TIME},	
+		#{SY_TIME},	
+		#{PARAM_ABLE},	
+		#{LIMIT_ABLE},	
+		#{DECIMAL_NUMBER}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include> 
+		(
+	    
+	    
+	    DEVICE_ID,
+	    PARAM_ID,
+		PARAM_NAME,	
+		MODBUS_ADDR,
+		DATA_TYPES ,
+		BYTE_ORDER ,
+		PARAM_ABLE,
+		DECIMAL_NUMBER ,
+		STR_TIME,
+		SY_TIME
+		) values (
+	   
+	    #{DEVICE_ID},
+	    #{PARAM_ID},
+		#{PARAM_NAME},	
+		#{MODBUS_ADDR},
+		
+		 #{DATA_TYPES},	
+		  #{BYTE_ORDER},
+		   #{PARAM_ABLE},
+		    #{DECIMAL_NUMBER},
+		now(),
+	 TIMESTAMPDIFF(MINUTE,'1970-1-1 00:00:00',now())
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include> 
+		where 
+			PARAM_ID = #{PARAM_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+		
+		    DEVICE_ID= #{DEVICE_ID},
+	   
+			PARAM_NAME = #{PARAM_NAME},
+		
+			MODBUS_ADDR = #{MODBUS_ADDR},
+			DATA_TYPES = #{DATA_TYPES},
+			BYTE_ORDER = #{BYTE_ORDER},
+			SCALE_FACTOR = #{SCALE_FACTOR},
+			OFFSET_VALUE = #{OFFSET_VALUE},
+			LIMITH = #{LIMITH},
+			LIMITHH = #{LIMITHH},
+			LIMITL = #{LIMITL},
+			LIMITLL = #{LIMITLL},
+			PARAM_VALUE = #{PARAM_VALUE},
+			STR_TIME = #{STR_TIME},
+			SY_TIME = #{SY_TIME},
+			PARAM_ABLE = #{PARAM_ABLE},
+			LIMIT_ABLE = #{LIMIT_ABLE},
+			DECIMAL_NUMBER = #{DECIMAL_NUMBER}
+	
+		where 
+		PARAM_ID = #{PARAM_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field3"></include>
+		from 
+		<include refid="tableName3"></include> 
+		where 
+			PARAM_ID = #{PARAM_ID}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+			select
+		<include refid="Field3"></include>
+		from 
+		<include refid="tableName3"></include> 
+		
+		
+		where 1=1 and 
+		R_ID =#{pd.R_ID}  and PARAM_TYPE in (7,8,9) order by PARAM_ID 
+		<!--<if test="pd.keywords!= null and pd.keywords != ''"> 关键词检索 
+			and
+				(
+					根据需求自己加检索条件
+					字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 
+					字段2 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+				
+				)
+		</if>
+	-->
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage_water" parameterType="page" resultType="pd">
+		select
+		<include refid="Field3"></include>
+		from 
+		<include refid="tableName3"></include> 
+		
+		
+		where 1=1 and 
+		R_ID =#{pd.R_ID}  and PARAM_TYPE in (1,2,3,4) order by PARAM_ID 
+		<!--<if test="pd.keywords!= null and pd.keywords != ''"> 关键词检索 
+			and
+				(
+					根据需求自己加检索条件
+					字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 
+					字段2 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+				
+				)
+		</if>
+	-->
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage_other" parameterType="page" resultType="pd">
+		select
+		<include refid="Field3"></include>
+		from 
+		<include refid="tableName3"></include> 
+		
+		
+		where 1=1 and 
+		R_ID =#{pd.R_ID}  and PARAM_TYPE in (5,6,11,12,13,14,-1,-2,-3,-4,-5,-6) order by PARAM_ID 
+		<!--<if test="pd.keywords!= null and pd.keywords != ''"> 关键词检索 
+			and
+				(
+					根据需求自己加检索条件
+					字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 
+					字段2 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+				
+				)
+		</if>
+	-->
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage_control" parameterType="page" resultType="pd">
+		select
+		<include refid="Field3"></include>
+		from 
+		<include refid="tableName3"></include> 
+		
+		
+		where 1=1 and 
+		R_ID =#{pd.R_ID}  and PARAM_TYPE=0 order by PARAM_ID 
+		<!--<if test="pd.keywords!= null and pd.keywords != ''"> 关键词检索 
+			and
+				(
+					根据需求自己加检索条件
+					字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 
+					字段2 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+				
+				)
+		</if>
+	-->
+	</select>
+	<!-- 列表 -->
+	<select id="listAll_pd" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field3"></include>
+		from 
+		<include refid="tableName3"></include>  
+		
+		where 1=1 and 
+		R_ID =#{R_ID}  and PARAM_TYPE in (7,8,9) order by PARAM_ID 
+		
+		
+	</select>
+	<!-- 列表 -->
+	<select id="listAll_pd_water" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field3"></include>
+		from 
+		<include refid="tableName3"></include>
+		where 1=1 and 
+		R_ID =#{R_ID}  and PARAM_TYPE in (1,2,3,4) order by PARAM_ID 
+		
+		
+	</select>
+	<!-- 列表 -->
+	<select id="listAll_pd_other" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field3"></include>
+		from 
+		<include refid="tableName3"></include>
+		where 1=1 and 
+		R_ID =#{R_ID}  and PARAM_TYPE in (5,6,11,12,13,14,-1,-2,-3,-4,-5,-6) order by PARAM_ID 
+		
+		
+	</select>
+	<!-- 列表 -->
+	<select id="listAll_pd_control" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field3"></include>
+		from 
+		<include refid="tableName3"></include>
+		where 1=1 and 
+		R_ID =#{R_ID}  and PARAM_TYPE=0 order by PARAM_ID 
+		
+		
+	</select>
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include> 
+		from 
+		<include refid="tableName"></include> a
+		where 
+			R_ID = #{R_ID} 
+	</select>
+	<!-- 列表(全部) -->
+	<select id="listAllByDev" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include> 
+		from 
+		<include refid="tableName"></include> a
+		where 
+			DEVICE_ID = #{DEVICE_ID} order by PARAM_ID desc
+	</select>
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			PARAM_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+	<!-- fh313596790qq(青苔) -->
+</mapper>

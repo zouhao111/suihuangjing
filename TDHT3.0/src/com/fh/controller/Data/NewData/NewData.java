@@ -1,0 +1,298 @@
+package com.fh.controller.Data.NewData;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.apache.shiro.session.Session;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.fh.controller.base.BaseController;
+import com.fh.entity.system.Menu;
+import com.fh.service.system.balance.BalanceManager;
+import com.fh.service.system.newdata.NewDataManager;
+import com.fh.service.system.poll_sum.Poll_SumManager;
+import com.fh.util.AppUtil;
+import com.fh.util.Const;
+import com.fh.util.Jurisdiction;
+import com.fh.util.PageData;
+@Controller
+public class NewData  extends BaseController {
+
+	@Resource(name="NewDataService")
+	private NewDataManager NewDataService;
+	@Resource(name="BalanceService")
+	private BalanceManager BalanceService;
+	@Resource(name="Poll_SumService")
+	private Poll_SumManager Poll_SumService;
+	
+	/**
+	 * 进入首页后的默认页面
+	 * @return
+	 * @throws Exception 
+	 */
+	
+	@RequestMapping(value="/NewData")
+	public ModelAndView NewData(String R_ID,String ROLE_NAME,String MENU_ID) throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd=this.getPageData();
+		
+		Session session = Jurisdiction.getSession();
+		
+		List<Menu> allmenuList = new ArrayList<Menu>();
+		List<Menu> allmenuLists = new ArrayList<Menu>();
+		allmenuList = (List<Menu>)session.getAttribute(ROLE_NAME + Const.SESSION_allmenuList);
+		for(int i=0;i<allmenuList.size();i++){
+			if(allmenuList.get(i).getMENU_ID().equals(MENU_ID)){
+				allmenuLists=allmenuList.get(i).getSubMenu();
+			}
+		}
+		for(int a=0;a<allmenuLists.size();a++){
+			mv.addObject("list"+a,allmenuLists.get(a));
+		}
+		mv.addObject("pd",pd);
+		mv.addObject("R_ID",R_ID);
+		mv.addObject("list",allmenuLists);
+		mv.addObject("ROLE_NAME",ROLE_NAME);
+		mv.addObject("menuUrl","NewData.do?MENU_ID="+MENU_ID+"&R_ID=");
+		mv.setViewName("data/NewData/NewData");
+		return mv;
+	}
+	@RequestMapping(value="/NewData_water")
+	@ResponseBody
+	public Object NewData_water(String R_ID) throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		Map<String,Object> map = new HashMap<String,Object>();
+		String errInfo = "success";
+		
+		List<PageData>	varList = NewDataService.listAll_pd_water(pd);	//列出Conf_param列表
+        	
+        
+		
+		map.put("varList", varList);
+		map.put("result", errInfo);				//返回结果
+		return AppUtil.returnObject(new PageData(), map);
+	}
+	@RequestMapping(value="/NewData_poll")
+	@ResponseBody
+	public Object NewData_poll(String R_ID) throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		Map<String,Object> map = new HashMap<String,Object>();
+		String errInfo = "success";
+		
+		List<PageData>	varList = NewDataService.listAll_pd(pd);	//列出Conf_param列表
+        	
+        
+		
+		map.put("varList", varList);
+		map.put("result", errInfo);				//返回结果
+		return AppUtil.returnObject(new PageData(), map);
+	}
+	@RequestMapping(value="/balance_water")
+	@ResponseBody
+	public Object balance_water(String R_ID) throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		Map<String,Object> map = new HashMap<String,Object>();
+		String errInfo = "success";
+		List<PageData>dayfollow=BalanceService.list_day_follow(pd);
+		List<PageData>	BalanceList = new ArrayList<PageData>();
+		if(dayfollow!=null&&dayfollow.size()>0){
+			pd.put("dayfollow", dayfollow);
+			BalanceList = BalanceService.balance(pd);	//列出Conf_param列表
+		}
+		
+		/*PageData pdss=Poll_SumService.selectMaxCyc(pd);
+		pd.put("start_time", pdss.getString("sy_time"));
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+		String end_strTime=df.format(new Date());// new Date()为获取当前系统时间
+		long end_time=StringDataLongTime.stringToLong(end_strTime,"yyyy-MM-dd");
+		pd.put("end_time", end_time);*/
+		
+		PageData pds=new PageData();
+		
+		
+        	if(BalanceList.size()>0){
+        		 pds=BalanceList.get(BalanceList.size()-1);
+        	}else{
+        		pds.put("idHave",true);
+        		pds.put("isHave",true);
+        		pds.put("lsHave",true);
+    			pds.put("ldHave",true);
+				pds.put("Idztraffic", 0);
+				pds.put("Isztraffic", 0);
+				pds.put("Ldztraffic",0);
+				pds.put("Lsztraffic", 0);
+				
+				pds.put("Idztraffic_sum", 0);
+				pds.put("Isztraffic_sum", 0);
+				pds.put("Ldztraffic_sum", 0);
+				pds.put("Lsztraffic_sum", 0);
+				pds.put("Losslimit",0);
+				pds.put("Losslimit_sum", 0);
+				pds.put("Wastage_sum", 0);
+		
+				pds.put("Wastage_sum", 0);
+               pds.put("Unknow_sum",0);
+				
+				pds.put("Unknow", 0);
+				
+				
+        	}
+		
+		
+		map.put("pds", pds);
+		map.put("result", errInfo);				//返回结果
+		return AppUtil.returnObject(new PageData(), map);
+	}
+	@RequestMapping(value="/poll_sum")
+	@ResponseBody
+	public Object poll_sum(String R_ID) throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		Map<String,Object> map = new HashMap<String,Object>();
+		String errInfo = "success";
+		List<PageData>	varList = NewDataService.listAll_pd(pd);	//列出Conf_param列表
+		PageData	poll_all_sum=new PageData();
+		PageData	poll_all_sum1=new PageData();
+		PageData	poll_all_sum2=new PageData();
+
+		PageData	poll_cyc=Poll_SumService.selectMaxCyc(pd);
+		pd.put("cyc", poll_cyc.getInteger("cyc"));
+		
+		for(int a=1;a<=3;a++){
+			
+			List<PageData>	TabName=new ArrayList<PageData>();
+			if(a==1){
+				pd.put("tabAllName", "calc_quality_01_5min_w_%%");
+				TabName=NewDataService.selectAllTabName(pd);	
+			}else if(a==2){
+				pd.put("tabAllName", "calc_quality_02_5min_w_%%");
+					TabName=NewDataService.selectAllTabName(pd);
+			}else if(a==3){
+				pd.put("tabAllName", "calc_quality_03_5min_w_%%");
+					TabName=NewDataService.selectAllTabName(pd);
+			}
+		
+		
+		if(TabName!=null){
+		for(int i=0;i<TabName.size();i++){
+			PageData poll__sum=new PageData();
+			pd.put("tabName", TabName.get(i).getString("TABLE_NAME"));
+			if(a==1){
+					poll__sum = Poll_SumService.list_Poll_Sum(pd);
+			}else if(a==2){
+					poll__sum = Poll_SumService.list_Poll_Sum2(pd);
+			}else if(a==3){
+					poll__sum = Poll_SumService.list_Poll_Sum3(pd);
+			}
+			if(poll_all_sum1!=null&&poll_all_sum1.size()>0){
+				if(poll__sum!=null&&poll_all_sum1!=null){
+				poll_all_sum1.put("flow_5min", poll__sum.getDouble("flow_5min")+poll_all_sum1.getDouble("flow_5min"));
+				for(int j=0;j<varList.size();j++){
+					if(varList.get(j).getInteger("pollutant_type")==1||varList.get(j).getInteger("pollutant_type")==2){
+					poll_all_sum1.put(varList.get(j).getString("param_name_sql"), poll__sum.getDouble(varList.get(j).getString("param_name_sql"))+poll_all_sum1.getDouble(varList.get(j).getString("param_name_sql")));	
+					/*if(i==TabName.size()-1){
+						Double flow=poll_all_sum1.getDouble("flow_5min");
+						
+						varList.get(j).put("param_value",fixed(poll_all_sum1.getDouble(varList.get(j).getString("param_name_sql"))/1000,varList.get(j).getInteger("decimal_number")));
+						if(flow<=0){
+							varList.get(j).put("param_value2", 0);
+								
+						}else{
+						varList.get(j).put("param_value2", fixed((varList.get(j).getDouble("param_value")*1000)/flow,varList.get(j).getInteger("decimal_number")));
+						}
+						
+					}*/
+					
+					}
+					
+				}
+			}
+			}else{
+				poll_all_sum1=poll__sum;
+			}
+			
+		  }
+		}
+		
+		if(poll_all_sum1!=null){
+			poll_all_sum.putAll(poll_all_sum1);
+
+		//	poll_all_sum = Poll_SumService.list_Poll_Sum(pd);	//列出Conf_param列表
+		//	poll_all_sum2 = Poll_SumService.list_Poll_Sum2(pd);	//列出Conf_param列表
+		}
+		if(poll_all_sum2!=null){
+			poll_all_sum.putAll(poll_all_sum2);
+		}
+		/*	poll_all_sum = Poll_SumService.list_Poll_Sum(pd);	//列出Conf_param列表
+			poll_all_sum2 = Poll_SumService.list_Poll_Sum2(pd);	//列出Conf_param列表
+		if(poll_all_sum2!=null){
+			poll_all_sum.putAll(poll_all_sum2);
+
+				
+		}*/
+		
+		}
+		
+		
+			
+			
+			
+			
+			
+			
+			//	poll_all_sum = Poll_SumService.list_Poll_Sum(pd);	//列出Conf_param列表
+		//	poll_all_sum2 = Poll_SumService.list_Poll_Sum2(pd);	//列出Conf_param列表
+	//	if(poll_all_sum2!=null){
+		//	poll_all_sum.putAll(poll_all_sum2);
+				
+	//	}
+		
+		//poll_all_sum.putAll(poll_all_sum2);
+		
+		if(poll_all_sum!=null&&poll_all_sum.size()!=0){
+			
+		
+		Double flow=poll_all_sum.getDouble("flow_5min");
+		for(int i=0;i<varList.size();i++){
+			if(varList.get(i).getInteger("pollutant_type")==1||varList.get(i).getInteger("pollutant_type")==2){
+				varList.get(i).put("param_value", poll_all_sum.getDouble(varList.get(i).getString("param_name_sql"))/1000);
+				if(flow<=0){
+					varList.get(i).put("param_value2", 0);
+						
+				}else{
+				varList.get(i).put("param_value2", (varList.get(i).getDouble("param_value")*1000)/flow);
+				}
+				
+			}
+		}
+		
+		}
+		
+		
+		map.put("varList", varList);
+		map.put("poll_all_sum", poll_all_sum);
+		map.put("result", errInfo);				//返回结果
+		return AppUtil.returnObject(new PageData(), map);
+	}
+	public Double fixed(Double d,int i){
+		BigDecimal   b1   =   new   BigDecimal(d);  
+		Double   num   =   b1.setScale(i,   BigDecimal.ROUND_HALF_UP).doubleValue(); 
+		return num;
+	}
+}

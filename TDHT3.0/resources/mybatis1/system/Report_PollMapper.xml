@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Rrport_PollService">
+		
+	
+
+	<sql id="tableName">
+		calc_quality_01_day_max
+	</sql>
+	<sql id="tableName2">
+		calc_quality_02_day_max
+	</sql>
+	<sql id="tableName3">
+		calc_quality_03_day_max
+	</sql>
+	<sql id="tableName4">
+		calc_quality_01_day_min
+	</sql>
+	<sql id="tableName5">
+		calc_quality_02_day_min
+	</sql>
+	<sql id="tableName6">
+		calc_quality_03_day_min
+	</sql>
+	
+	<sql id="tableName7">
+		calc_quality_01_day_avg
+	</sql>
+	<sql id="tableName8">
+		calc_quality_02_day_avg
+	</sql>
+	<sql id="tableName9">
+		calc_quality_03_day_avg
+	</sql>
+	
+	
+	<sql id="Field">
+		 a.r_id,	
+		 a.str_time,
+		 a.sy_time,
+		 
+		 a.cyc,
+		q_PH,
+		q_temp,
+		q_turbidity,
+		q_conductivity,
+		q_DO,
+		q_COD,
+		q_COD_Mn,
+		q_NH4,
+		q_TOC,
+		q_TP,
+		q_TN,
+		q_NO3,
+	    q_Phe,
+		q_CN,
+		q_chlorophyll,
+		q_b_g_algae,
+		q_FDOM,
+		q_VOCs,
+		q_nitrite,
+		q_CrCl3_6H2O,
+		q_Pb,
+		q_Cd,
+		q_Cu,
+		q_Hg,
+		q_As,
+		q_Fe,
+		q_Cr6,
+		q_Mn,
+		q_Ni,
+		q_Zn,
+		q_tss,
+		q_MnO4,
+		q_Salinity,
+		q_Phosphate,
+		q_Sulfate,
+		q_NH42
+		
+		
+		
+		  
+	</sql>
+	<sql id="Field2">
+		
+		 b.r_id,	
+		 b.str_time,
+		 b.sy_time,
+		 
+		q_An,
+		q_F,
+		q_S,
+		q_Poison,
+		q_tC2H2Cl2,
+		q_fC2H2Cl2,
+		q_CHCl3,
+		q_C2H2Cl2,
+		q_Benzene,
+		q_C2HCl3,
+		q_C7H8,
+		q_C2Cl4,
+		q_C6H5Cl,
+		q_C6H5C2H5,
+		q_C8H10,
+		q_C8H8,
+			q_C6H4CH32,
+		q_C9H12,
+		q_14C6H4Cl2,
+		q_12C6H4Cl2,
+		q_C2H3Cl,
+		q_C2H4O,
+		q_C3H4O,
+		q_11C2H2Cl2,
+		q_C3H3N,
+		q_CH2CClCHCH2,
+		q_CHBr3,
+		q_C10H16,
+		q_C4Cl6,
+		q_CH2Cl2,
+		q_OC,
+		
+		q_C6H5NO2,
+		q_C6H4N2O4,
+		q_C6H3Cl3,
+		q_C6H4Cl2
+
+		  
+	</sql>
+	
+	<sql id="Field3">
+	c.r_id,	
+		 c.str_time,
+		 c.sy_time,
+		 
+	q_spare01,
+   q_spare02,
+   q_spare03,
+  q_spare04,
+q_spare05,
+q_spare06,
+q_spare07,
+q_spare08,
+q_spare09,
+q_spare10,
+q_spare11,
+q_spare12,
+q_spare13,
+q_spare14,
+q_spare15,
+q_spare16,
+q_spare17,
+q_spare18,
+q_spare19,
+q_spare20,
+q_spare21,
+q_spare22,
+q_spare23,
+q_spare24,
+q_spare25
+	</sql>
+	
+	
+	
+		<!-- 字段值 -->
+	<sql id="FieldValue">
+		
+		  #{r_id},	
+		 #{str_time},
+		 #{sy_time},
+		
+		#{ cyc},
+		#{q_PH},
+		#{q_temp},
+		#{q_turbidity},
+		#{q_conductivity},
+		#{q_DO},
+		#{q_COD},
+		#{q_COD_Mn},
+		#{q_NH4},
+		#{q_TOC},
+		#{q_TP},
+		#{q_TN},
+		#{q_NO3},
+	   #{ q_Phe},
+		#{q_CN},
+		#{q_chlorophyll},
+		#{q_b_g_algae},
+		#{q_FDOM},
+		#{q_VOCs},
+		#{q_nitrite},
+		#{q_CrCl3_6H2O},
+		#{q_Pb},
+		#{q_Cd},
+		#{q_Cu},
+		#{q_Hg},
+		#{q_As},
+		#{q_Fe},
+		#{q_Cr6},
+		#{q_Mn},
+		#{q_Ni},
+		#{q_Zn},
+		#{q_tss},
+		#{q_MnO4},
+		#{q_Salinity},
+		#{q_Phosphate},
+		#{q_Sulfate},
+		#{q_NH42}
+		
+	</sql>
+	
+		<!-- 字段值 -->
+	<sql id="FieldValue2">
+		
+		
+		
+		#{r_id},	
+		 #{str_time},
+		 #{sy_time},
+		#{q_An},
+		#{q_F},
+		#{q_S},
+		#{q_Poison},
+		#{q_tC2H2Cl2},
+		#{q_fC2H2Cl2},
+		#{q_CHCl3},
+		#{q_C2H2Cl2},
+		#{q_Benzene},
+		#{q_C2HCl3},
+		#{q_C7H8},
+		#{q_C2Cl4},
+		#{q_C6H5Cl},
+		#{q_C6H5C2H5},
+		#{q_C8H10},
+		#{q_C8H8},
+			#{q_C6H4CH32},
+		#{q_C9H12},
+		#{q_14C6H4Cl2},
+		#{q_12C6H4Cl2},
+		#{q_C2H3Cl},
+		#{q_C2H4O},
+		#{q_C3H4O},
+		#{q_11C2H2Cl2},
+		#{q_C3H3N},
+		#{q_CH2CClCHCH2},
+		#{q_CHBr3},
+		#{q_C10H16},
+		#{q_C4Cl6},
+		#{q_CH2Cl2},
+		#{q_OC},
+		
+		#{q_C6H5NO2},
+		#{q_C6H4N2O4},
+		#{q_C6H3Cl3},
+		#{q_C6H4Cl2}
+	</sql>
+	<sql id="FieldValue3">
+	#{r_id},	
+		 #{str_time},
+		 #{sy_time},
+	#{q_spare01},
+    #{q_spare02},
+	#{q_spare03},
+	#{q_spare04},
+	#{q_spare05},
+	#{q_spare06},
+	#{q_spare07},
+	#{q_spare08},
+	#{q_spare09},
+	#{q_spare10},
+	#{q_spare11},
+	#{q_spare12},
+	#{q_spare13},
+	#{q_spare14},
+	#{q_spare15},
+	#{q_spare16},
+	#{q_spare17},
+	#{q_spare18},
+	#{q_spare19},
+	#{q_spare20},
+	#{q_spare21},
+	#{q_spare22},
+	#{q_spare23},
+	#{q_spare24},
+	#{q_spare25}
+	</sql>
+	
+	
+	<!-- 日报表平均值 -->
+	<select id="poll_day_avg" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>,<include refid="Field2"></include>,<include refid="Field3"></include>
+		from 
+		<include refid="tableName7"></include>a ,<include refid="tableName8"></include>b,<include refid="tableName9"></include>c
+		where 1=1 and 
+		a.r_id =#{R_ID}  and a.r_id=b.r_id and b.r_id=c.r_id and a.sy_time=b.sy_time and b.sy_time=c.sy_time
+		<!--and a.sy_time>#{start_sy_time} and a.sy_time<#{end_sy_time}  -->
+		and a.cyc=(select max(a.cyc) from <include refid="tableName7"></include>  where a.r_id =#{R_ID} )
+	</select>
+	
+	
+	<!-- 日报表 -->
+	<select id="poll_day_max" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>,<include refid="Field2"></include>,<include refid="Field3"></include>
+		from 
+		<include refid="tableName"></include>a ,<include refid="tableName2"></include>b,<include refid="tableName3"></include>c
+		where 1=1 and 
+		a.r_id =#{R_ID}  and a.r_id=b.r_id and b.r_id=c.r_id and a.sy_time=b.sy_time and b.sy_time=c.sy_time
+		<!--and a.sy_time>#{start_sy_time} and a.sy_time<#{end_sy_time}  -->
+		and a.cyc=(select max(a.cyc) from <include refid="tableName"></include>  where a.r_id =#{R_ID} )
+	</select>
+	<!-- 日报表 -->
+	<select id="poll_day_min" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>,<include refid="Field2"></include>,<include refid="Field3"></include>
+		from 
+		<include refid="tableName4"></include>a ,<include refid="tableName5"></include>b,<include refid="tableName6"></include>c
+		where 1=1 and 
+		a.r_id =#{R_ID}  and a.r_id=b.r_id and b.r_id=c.r_id and a.sy_time=b.sy_time and b.sy_time=c.sy_time
+		<!--and a.sy_time>#{start_sy_time} and a.sy_time<#{end_sy_time}  -->
+		and a.cyc=(select max(a.cyc) from <include refid="tableName"></include>  where a.r_id =#{R_ID} )
+		
+		
+	</select>
+	
+	
+	<!-- 日报表 -->
+	<select id="poll_day_avg1" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName7"></include> a 
+		where 1=1 and 
+		a.r_id =#{R_ID}  
+		and a.sy_time &gt;=#{start_sy_time} and a.sy_time &lt;=#{end_sy_time} 
+		and a.cyc=(select max(a.cyc) from <include refid="tableName7"></include>  where a.r_id =#{R_ID} ) 
+		
+		
+	</select>
+	<!-- 日报表 -->
+	<select id="poll_day_avg2" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field2"></include>
+		from 
+		<include refid="tableName8"></include> b 
+		where 1=1 and 
+		b.r_id =#{R_ID}  
+		and b.sy_time &gt;=#{start_sy_time} and b.sy_time &lt;=#{end_sy_time} 
+		and b.cyc=(select max(b.cyc) from <include refid="tableName8"></include>  where b.r_id =#{R_ID} ) 
+		
+		
+	</select>
+	<!-- 日报表 -->
+	<select id="poll_day_avg3" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field3"></include>
+		from 
+		<include refid="tableName9"></include> c 
+		where 1=1 and 
+		c.r_id =#{R_ID}  
+		and c.sy_time &gt;=#{start_sy_time} and c.sy_time &lt;=#{end_sy_time} 
+		and c.cyc=(select max(c.cyc) from <include refid="tableName9"></include>  where c.r_id =#{R_ID} ) 
+		
+		
+	</select>
+	
+	
+	<!-- 日报表 -->
+	<select id="poll_day_max1" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include> a 
+		where 1=1 and 
+		a.r_id =#{R_ID}  
+		and a.sy_time &gt;=#{start_sy_time} and a.sy_time &lt;=#{end_sy_time} 
+		and a.cyc=(select max(a.cyc) from <include refid="tableName"></include>  where a.r_id =#{R_ID} ) 
+		
+		
+	</select>
+	
+	<!-- 日报表 -->
+	<select id="poll_one_day" parameterType="pd" resultType="pd">
+		select
+		 a.r_id,	
+		 a.str_time,
+		 a.sy_time,
+		 a.cyc,
+		${mySelect} value 
+		from 
+		${tableName} a 
+		where 1=1 and 
+		a.r_id =#{R_ID}  
+		and a.sy_time &gt;=#{start_sy_time} and a.sy_time &lt;=#{end_sy_time} 
+		and a.cyc=(select max(a.cyc) from ${tableName}  where a.r_id =#{R_ID} )
+	</select>
+	
+	
+	
+	<!-- 日报表 -->
+	<select id="poll_day_max2" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field2"></include>
+		from 
+		<include refid="tableName2"></include> b 
+		where 1=1 and 
+		b.r_id =#{R_ID}  
+		and b.sy_time&gt;=#{start_sy_time} and b.sy_time&lt;=#{end_sy_time}  
+		and b.cyc=(select max(b.cyc) from <include refid="tableName2"></include>  where b.r_id =#{R_ID} )
+		
+		
+	</select>
+	<!-- 日报表 -->
+	<select id="poll_day_max3" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field3"></include>
+		from 
+		<include refid="tableName3"></include> c 
+		where 1=1 and 
+		c.r_id =#{R_ID}  
+		and c.sy_time&gt;=#{start_sy_time} and c.sy_time &lt;=#{end_sy_time}
+		and c.cyc=(select max(c.cyc) from <include refid="tableName3"></include>  where c.r_id =#{R_ID} )
+		
+		
+	</select>
+	
+	<select id="poll_day_min1" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName4"></include> a 
+		where 1=1 and 
+		a.r_id =#{R_ID}  
+		and a.sy_time&gt;=#{start_sy_time} and a.sy_time&lt;=#{end_sy_time}  
+		and a.cyc=(select max(a.cyc) from <include refid="tableName4"></include>  where a.r_id =#{R_ID} )
+		
+		
+	</select>
+	
+	
+	<select id="poll_day_min2" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field2"></include>
+		from 
+		<include refid="tableName5"></include> b 
+		where 1=1 and 
+		b.r_id =#{R_ID}  
+		and b.sy_time&gt;=#{start_sy_time} and b.sy_time &lt;= #{end_sy_time} 
+		and b.cyc=(select max(b.cyc) from <include refid="tableName5"></include>  where b.r_id =#{R_ID} ) 
+		
+		
+	</select>
+	
+	<select id="poll_day_min3" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field3"></include>
+		from 
+		<include refid="tableName6"></include> c 
+		where 1=1 and 
+		c.r_id =#{R_ID}  
+		and c.sy_time&gt;=#{start_sy_time} and c.sy_time&lt;=#{end_sy_time} 
+		and c.cyc=(select max(c.cyc) from <include refid="tableName6"></include>  where c.r_id =#{R_ID} ) 
+		
+		
+	</select>
+	
+	
+</mapper>
